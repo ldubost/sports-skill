@@ -1,9 +1,9 @@
-Tennis results for
-What are the tennis results for
-What are the women tennis results for
-Women tennis results for
-Football results for
-What are the football results for
-Roland garros results for
-Roland garros woment results for
-.
+tennis results for {player}
+tennis results of {player}
+What are the tennis results (ok|for) {player}
+what are the (woman|women) tennis results (ok|for) {player}
+(Woman|Women) tennis results (ok|for) {player}
+Football results (ok|for) {player}
+What are the football results (ok|for) {player}
+Roland garros results (ok|for) {player}
+Roland garros (women|woman) results (ok|for) {player}
