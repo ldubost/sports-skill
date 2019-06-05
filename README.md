@@ -1,5 +1,5 @@
 # <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/robot.svg" card_color="#40DBB0" width="50" height="50" style="vertical-align:bottom"/> Sports
-Get sports results from open data sources
+Mycroft skill to get sports results from open data sources
 
 ## About
 Get sports results from open data sources including wikipedia
