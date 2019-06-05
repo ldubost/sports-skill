@@ -6,6 +6,8 @@ Get sports results from open data sources including wikipedia
 
 this service requires a server to treat the results and manage the sources. The code for this server is an XWiki Application provided here: https://github.com/ldubost/xwiki-sports-skill/ which currently supports only the Tennis French Open 2019.
 
+You can see a demo here mycroftsports.mp3
+
 ## Examples
 * "Tennis results for"
 * "Women tennis results for"
@@ -15,7 +17,7 @@ this service requires a server to treat the results and manage the sources. The 
 * "Roland garros women results for"
 
 ## Credits
-Ludovic Duobst
+Ludovic Dubost
 
 ## Category
 **Information**
