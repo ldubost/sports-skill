@@ -4,18 +4,15 @@ Get sports results from open data sources
 ## About
 Get sports results from open data sources including wikipedia
 
-this service requires a server to treat the results and manage the sources
+this service requires a server to treat the results and manage the sources. The code for this server is an XWiki Application provided here: https://github.com/ldubost/xwiki-sports-skill/ which currently supports only the Tennis French Open 2019.
 
 ## Examples
 * "Tennis results for"
+* "Women tennis results for"
 * "What are the tennis results for"
 * "What are the women tennis results for"
-* "Women tennis results for"
-* "Football results for"
-* "What are the football results for"
 * "Roland garros results for"
-* "Roland garros woment results for"
-* "."
+* "Roland garros women results for"
 
 ## Credits
 Ludovic Duobst
@@ -27,5 +24,5 @@ Sports
 ## Tags
 #Sports
 #Tennis
-#Football
+
 
