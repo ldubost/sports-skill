@@ -1,4 +1,4 @@
-import json, requests, urllib
+import json, requests, urllib, os
 from mycroft import MycroftSkill, intent_file_handler
 from mycroft.util.log import getLogger
 
@@ -19,7 +19,7 @@ class Sports(MycroftSkill):
         sport = message.data.get("sport", "tennis")
         player = message.data.get("player", "fra")
         if sport.find("volley")>=0:
-            sport = "volley-ball"
+            sport = "volleyball"
         if sport.find("soccer")>=0:
             sport = "football"
  
@@ -29,15 +29,6 @@ class Sports(MycroftSkill):
             type = "1"
         if fullmsg.find("women")>=0:
             type = "1"
-
-        if sport=="football" or sport=="volley-ball":
-            if player=="united states":
-                player = "usa"
-            if player=="china":
-                player = "chn"
-            if player=="romania":
-                player = "rou"
-            player = player[:3]
 
         url = baseurl + sportsuri + "&sport=" + sport + "&player=" + urllib.parse.quote(player) + "&type=" + type
         LOGGER.info("URL: " + url)
@@ -52,6 +43,40 @@ class Sports(MycroftSkill):
             str = "I could not find any " + sport + " results for " + player;
         self.speak(str)
 
+    @intent_file_handler('latest.intent')
+    def handle_latest(self, message):
+        LOGGER.info(message.data.get("sport", "tennis"))
+        fullmsg = message.data.get("utterance")
+        sport = message.data.get("sport", "tennis")
+        if sport.find("volley")>=0:
+            sport = "volleyball"
+        if sport.find("soccer")>=0:
+            sport = "football"
+ 
+        type = "0" 
+        if fullmsg.find("woman")>=0:
+            type = "1"
+        if fullmsg.find("women")>=0:
+            type = "1"
+
+        url = baseurl + sportsuri + "&sport=" + sport + "&type=" + type;
+
+        if fullmsg.find("latest")>=0:
+            url = url + "&lastNb=3&nextNb=1"
+        if fullmsg.find("next")>=0:
+            url = url + "&nextNb=3&lastNb=0"
+
+        LOGGER.info("URL: " + url)
+        resp = requests.get(url=url)
+        data = resp.json()
+        for key in data:
+            LOGGER.info(key)
+        sdata = json.dumps(data.get("text"))
+        LOGGER.info(sdata)
+        str = data.get("text")
+        if (str==""):
+            str = "I could not find any " + sport + " results";
+        self.speak(str)
 
     @intent_file_handler('available.intent')
     def handle_available(self, message):
