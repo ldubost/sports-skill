@@ -4,6 +4,7 @@ from mycroft.util.log import getLogger
 
 baseurl = "https://wikiscores.cloud.xwiki.com/xwiki/bin/get/Sports"
 sportsuri = "/Code/JSON?outputSyntax=plain"
+alluri = "/Code/GamesJSON?outputSyntax=plain"
 availableuri = "/Code/Features?outputSyntax=plain"
 
 LOGGER = getLogger(__name__)
@@ -65,6 +66,29 @@ class Sports(MycroftSkill):
             url = url + "&lastNb=3&nextNb=1"
         if fullmsg.find("next")>=0:
             url = url + "&nextNb=3&lastNb=0"
+
+        LOGGER.info("URL: " + url)
+        resp = requests.get(url=url)
+        data = resp.json()
+        for key in data:
+            LOGGER.info(key)
+        sdata = json.dumps(data.get("text"))
+        LOGGER.info(sdata)
+        str = data.get("text")
+        if (str==""):
+            str = "I could not find any " + sport + " results";
+        self.speak(str)
+
+    @intent_file_handler('latestall.intent')
+    def handle_latest(self, message):
+        fullmsg = message.data.get("utterance")
+
+        url = baseurl + alluri;
+
+        if fullmsg.find("latest")>=0:
+            url = url + "&status=finished&nb=3"
+        if fullmsg.find("next")>=0:
+            url = url + "&status=future&nb=3"
 
         LOGGER.info("URL: " + url)
         resp = requests.get(url=url)
