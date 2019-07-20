@@ -18,7 +18,7 @@ class Sports(MycroftSkill):
         LOGGER.info(message.data.get("sport", "tennis"))
         fullmsg = message.data.get("utterance")
         sport = message.data.get("sport", "tennis")
-        player = message.data.get("player", "fra")
+        player = message.data.get("player", "")
         if sport.find("volley")>=0:
             sport = "volleyball"
         if sport.find("soccer")>=0:
@@ -42,7 +42,15 @@ class Sports(MycroftSkill):
         str = data.get("text")
         if (str==""):
             str = "I could not find any " + sport + " results for " + player;
-        self.speak(str)
+            self.speak(str)
+        elif data.get("lastResultsTexts"):
+            for msg in data.get("lastResultsTexts"):
+                self.speak(msg)
+            for msg in data.get("nextGamesTexts"):
+                self.speak(msg)
+        else:
+            self.speak(str)
+
 
     @intent_file_handler('latest.intent')
     def handle_latest(self, message):
@@ -76,8 +84,18 @@ class Sports(MycroftSkill):
         LOGGER.info(sdata)
         str = data.get("text")
         if (str==""):
-            str = "I could not find any " + sport + " results";
-        self.speak(str)
+            str = "I could not find any " + sport + " results for " + player;
+            self.speak(str)
+        elif data.get("texts"):
+            for msg in data.get("texts"):
+                self.speak(msg)
+        elif data.get("lastResultsTexts"):
+            for msg in data.get("lastResultsTexts"):
+                self.speak(msg)
+            for msg in data.get("nextGamesTexts"):
+                self.speak(msg)
+        else:
+            self.speak(str)
 
     @intent_file_handler('latestall.intent')
     def handle_latest(self, message):
@@ -100,7 +118,17 @@ class Sports(MycroftSkill):
         str = data.get("text")
         if (str==""):
             str = "I could not find any " + sport + " results";
-        self.speak(str)
+            self.speak(str)
+        elif data.get("texts"):
+            for msg in data.get("texts"):
+                self.speak(msg)
+        elif data.get("lastResultsTexts"):
+            for msg in data.get("lastResultsTexts"):
+                self.speak(msg)
+            for msg in data.get("nextGamesTexts"):
+                self.speak(msg)
+        else:
+            self.speak(str)
 
     @intent_file_handler('available.intent')
     def handle_available(self, message):
